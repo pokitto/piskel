@@ -34,6 +34,15 @@
     }
     this.addEventListener(colorFormatSelect, 'change', this.onColorFormatChange_);
 
+    // Color bitness 
+    var colorBits = pskl.UserSettings.get(pskl.UserSettings.COLOR_BITS);
+    var colorBitsSelect = document.querySelector('.color-bits-select');
+    var selectedColorBitsOption = colorBitsSelect.querySelector('option[value="' + colorBits + '"]');
+    if (selectedColorBitsOption) {
+      selectedColorBitsOption.setAttribute('selected', 'selected');
+    }
+    this.addEventListener(colorBitsSelect, 'change', this.onColorBitsChange_);
+
     // Layer preview opacity
     var layerOpacityInput = document.querySelector('.layer-opacity-input');
     layerOpacityInput.value = pskl.UserSettings.get(pskl.UserSettings.LAYER_OPACITY);
@@ -57,6 +66,10 @@
 
   ns.MiscPreferencesController.prototype.onColorFormatChange_ = function (evt) {
     pskl.UserSettings.set(pskl.UserSettings.COLOR_FORMAT, evt.target.value);
+  };
+
+  ns.MiscPreferencesController.prototype.onColorBitsChange_ = function (evt) {
+    pskl.UserSettings.set(pskl.UserSettings.COLOR_BITS, evt.target.value);
   };
 
   ns.MiscPreferencesController.prototype.onMaxFpsChange_ = function (evt) {
